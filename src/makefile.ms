@@ -95,7 +95,7 @@ endif
 
 ifeq (${OS},__WIN32__)
   EXE=zsnesw.exe
-  FILEFORMAT=gnuwin32
+  FILEFORMAT=win32
   LIBS=${LIBSORIG} -ldxguid -ldinput8 -lwsock32 -luser32 -lgdi32 -lshell32 -lwinmm -mwindows
   OE=.obj
 endif
