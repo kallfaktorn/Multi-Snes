@@ -110,6 +110,8 @@ DWORD FirstActivate = 1;
 #define WORD   unsigned short
 #define DWORD  unsigned long
 
+#define NULL 0
+
 HWND hMainWindow;
 
 extern "C"
