@@ -165,15 +165,17 @@ int GetLeftUDP(void);
 
 int InitTCP()
 {
+   printf("Sockets initialized!\n");
+
    //MK:unused 2003/08/31
    //char blah[255];
-   WORD versionneeded = MAKEWORD(2,2);
-   WSADATA wsadata;
+   WORD versionneeded = MAKEWORD(2,2);  //DOC: Specifies Windows Sockets Specification 2.2
+   WSADATA wsadata; //DOC: Data structure for the Windows Socket API
 
    UDPEnable=0;
 
    /* Startup winsock */
-   WSAStartup(versionneeded, &wsadata);
+   WSAStartup(versionneeded, &wsadata); //DOC: Must be called before other Socket functions are called
 
    /* Verify version number and exit on wrong version */
    if (wsadata.wVersion != versionneeded)
