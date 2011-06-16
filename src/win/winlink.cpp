@@ -526,8 +526,22 @@ aquireagain:;
 extern "C" void SaveSramData(void);
 extern "C" void GUISaveVars(void);
 
+void CreateConsole()
+{
+	AllocConsole();
+	freopen("CONOUT$", "wb", stdout);
+}
+
+void DestroyConsole()
+{
+	fclose(stdout);
+	FreeConsole();
+}
+
 void ExitFunction()
 {
+   DestroyConsole();
+
    if (GUIOn2 == 0)
    {
       asm_call(SaveSramData);
@@ -693,6 +707,9 @@ LRESULT CALLBACK Main_Proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 int RegisterWinClass(void)
 {
+   AllocConsole();
+   freopen("CONOUT$", "wb", stdout);
+   
    if (AllowMultipleInst == 0)
    {
       HWND hFindWindow;
