@@ -163,9 +163,11 @@ int GetLeftUDP(void);
 * - no known side effects                                  *
 \**********************************************************/
 
+//Doc: Invoked when internet is being choosen from the netplay menu
+
 int InitTCP()
 {
-   printf("Sockets initialized!\n");
+   
 
    //MK:unused 2003/08/31
    //char blah[255];
@@ -196,7 +198,7 @@ int InitTCP()
 
 void DeInitTCP()
 {
-	WSACleanup();
+	WSACleanup(); //Doc: Cleaning Windows Socket API on exit
 }
 
 /**********************************************************\
@@ -214,15 +216,16 @@ void GetUDPStatus() {
 
   if (!UDPEnable){
     blah[0]=0;
-    retval = send(gamesocket,blah,1,0);
-    gethostname(blah,255);
-    retval = send(gamesocket,blah,strlen(blah),0);
+    retval = send(gamesocket,blah,1,0); //Doc: send 0???????.. through gamesocket
+    gethostname(blah,255); //Doc: blah = hostname
+	retval = send(gamesocket,blah,strlen(blah),0); //Doc: send hostname through socket
   }
   else {
-    blah[0]=1;
-    retval = send(gamesocket,blah,1,0);
-    gethostname(blah,255);
-    retval = send(gamesocket,blah,strlen(&blah[1])+1,0);
+    blah[0]=1; 
+    retval = send(gamesocket,blah,1,0); //Doc: send 1?????.. through socket
+    gethostname(blah,255); //Doc: blah = hostname
+	printf("%i\n", strlen(&blah[1])+1);
+    retval = send(gamesocket,blah,strlen(&blah[1])+1,0); 
   }
 
   retval = recv(gamesocket,blah,256,0);
